@@ -47,4 +47,19 @@
     <string name="home_button_donate">Donate to the CHaRM Initiative</string>
     <string name="home_txt_charm_stats_header">CHaRM 2018 Stats</string>
 
+    <!-- Info screen strings -->
+    <string name="info_title_what_is_charm">What is CHaRM?</string>
+    <string name="info_charm_definition"><b>CHaRM</b> stands for The <b>C</b>enter for <b>H</b>ard to <b>R</b>ecycle <b>M</b>aterials. It is a permanent drop-off facility that aims to improve our environmental health by encouraging reuse and diverting thousands of pounds of household hazardous waste, bulky trash and other hard to recycle items from Metro-Atlanta landfills and water systems.</string>
+    <string name="info_title_benefits">CHaRM’s Benefits to the Community</string>
+    <string name="info_benefits_list">1) Easily accessible and convenient location.\n2) Accepts a wider range of items than typical curbside recycling.\n3) Provides educational sessions about the importance of proper disposal of hard to recycle materials.\n4) Keeps hazardous materials out of our air, water, and soil.</string>
+    <string name="info_hours_title">Hours of operation</string>
+    <string name="info_hours">Tuesday and Thursday (9am - 4pm)\n Saturday (8am - 3pm)</string>
+    <string name="info_fall_closings_title">Fall Closings</string>
+    <string name="info_fall_closings">Thursday October 4th (closing at noon)</string>
+    <string name="info_address_title">Address:</string>
+    <string name="info_address">1110 Hill Street\nSE Atlanta, GA. 30315</string>
+    <string name="info_phone_number_title">Phone Number:</string>
+    <string name="info_phone_number">404-600-6386</string>
+    <string name="info_contact_info_title">Contact Information</string>
+
 </resources>

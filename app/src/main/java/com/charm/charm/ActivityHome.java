@@ -78,6 +78,12 @@ public class ActivityHome extends AppCompatActivity {
                                 fragmentTransaction.replace( R.id.frame_fragment_container, fragmentRecycle );
                                 fragmentTransaction.commit();
                                 break;
+                            case R.id.nav_info_option:
+                                fragmentTransaction = fragmentManager.beginTransaction();
+                                FragmentInfo fragmentInfo = new FragmentInfo();
+                                fragmentTransaction.replace( R.id.frame_fragment_container, fragmentInfo );
+                                fragmentTransaction.commit();
+                                break;
                         }
 
                         drawerLayout.closeDrawers();
