@@ -40,9 +40,17 @@ public class FragmentHome extends Fragment {
     private ArrayList<DonationCategory> createCategories() {
         ArrayList<DonationCategory> categories = new ArrayList<>();
         categories.add( new DonationCategory( "Paint", 219245, "Gallons" ) );
-        categories.add( new DonationCategory( "Illegaly Dumped Tires", 21500, "Tires" ) );
+        categories.add( new DonationCategory( "Illegally Dumped Tires", 21500, "Tires" ) );
         categories.add( new DonationCategory( "Hazardous Chemicals", 111643, "Gallons" ) );
         categories.add( new DonationCategory( "Electronics", 211, "lbs." ) );
+        categories.add( new DonationCategory( "Styrofoam", 2578, "lbs." ) );
+        categories.add( new DonationCategory( "Metal", 231705, "lbs." ) );
+        categories.add( new DonationCategory( "Mattresses", 1074, "" ) );
+        categories.add( new DonationCategory( "Textiles", 67320, "lbs." ) );
+        categories.add( new DonationCategory( "Single Stream", 22, "Tons" ) );
+        categories.add( new DonationCategory( "Cooking Grease", 175, "Gallons" ) );
+        categories.add( new DonationCategory( "Glass", 121, "Tons" ) );
+        categories.add( new DonationCategory( "Visitors", 15520, "People" ) );
 
         return categories;
     }

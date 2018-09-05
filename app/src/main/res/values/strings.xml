@@ -45,6 +45,6 @@
 
     <!-- Home screen strings -->
     <string name="home_button_donate">Donate to the CHaRM Initiative</string>
-
+    <string name="home_txt_charm_stats_header">CHaRM 2018 Stats</string>
 
 </resources>

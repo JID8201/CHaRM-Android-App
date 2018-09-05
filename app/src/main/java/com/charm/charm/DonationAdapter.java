@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class DonationAdapter extends ArrayAdapter<DonationCategory> {
@@ -31,7 +32,7 @@ public class DonationAdapter extends ArrayAdapter<DonationCategory> {
 
         // Populate data into the template.
         categoryName.setText( category.getDonation_name());
-        categoryAmount.setText(  Integer.toString( category.getDonation_amount() ) );
+        categoryAmount.setText( NumberFormat.getIntegerInstance().format( category.getDonation_amount() ) );
         categoryUnit.setText( category.get_unit() );
 
         return convertView;

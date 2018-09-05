@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="2.5sp" />
 
     <TextView
         android:id="@+id/item_txt_amount"
@@ -30,7 +31,8 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/item_txt_category"
         app:layout_constraintEnd_toStartOf="@+id/item_txt_unit"
-        app:layout_constraintTop_toBottomOf="@+id/item_txt_category" />
+        app:layout_constraintTop_toBottomOf="@+id/item_txt_category"
+        android:paddingBottom="2.5sp" />
 
     <TextView
         android:id="@+id/item_txt_unit"
@@ -45,5 +47,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_txt_amount"
-        app:layout_constraintVertical_bias="0.586" />
+        app:layout_constraintVertical_bias="0.586"
+        android:paddingBottom="2.5sp" />
 </android.support.constraint.ConstraintLayout>
