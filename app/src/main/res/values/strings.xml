@@ -62,4 +62,16 @@
     <string name="info_phone_number">404-600-6386</string>
     <string name="info_contact_info_title">Contact Information</string>
 
+    <!-- Zip Dialog screen -->
+    <string name="zip_title">Please enter your home zip code</string>
+    <string name="zip_submit">Submit</string>
+    <string name="zip_hint">30318</string>
+
+    <!-- Preferences -->
+    <string name="pref_preferences">preferences</string>
+    <string name="pref_zipcode">zipcode</string>
+
+    <!-- Recycle screen strings -->
+    <string name="recycle_zip">Your zip code:</string>
+
 </resources>

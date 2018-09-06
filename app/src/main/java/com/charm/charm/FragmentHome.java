@@ -1,6 +1,8 @@
 package com.charm.charm;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -53,6 +55,23 @@ public class FragmentHome extends Fragment {
         categories.add( new DonationCategory( "Visitors", 15520, "People" ) );
 
         return categories;
+    }
+
+    @Override
+    public void onViewCreated( View view, Bundle savedInstanceState ) {
+        // Uncomment this and comment out the code below to reset the entered zip code.
+//        SharedPreferences sharedPreferences = getActivity().getSharedPreferences( getString( R.string.pref_preferences ), Context.MODE_PRIVATE );
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString( getString( R.string.pref_zipcode ), null );
+//        editor.apply();
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences( getString( R.string.pref_preferences ), Context.MODE_PRIVATE );
+        String zipcode = sharedPreferences.getString( getString( R.string.pref_zipcode ), null );
+
+        if( zipcode == null ) {
+            ZipDialogFragment zipDialogFragment = new ZipDialogFragment();
+            zipDialogFragment.show( getFragmentManager(), "zipcode" );
+        }
     }
 
 }
