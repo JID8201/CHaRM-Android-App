@@ -79,7 +79,9 @@ public class FragmentRecycle extends Fragment {
             public void onClick(View view) {
                 spinner.setSelection( 0 );
                 EditText edit_donation_amount = recycleView.findViewById( R.id.recycle_num_quantity );
+                EditText edit_description = recycleView.findViewById( R.id.recycle_edit_description );
                 edit_donation_amount.setText( "" );
+                edit_description.setText( "" );
 
                 Toast.makeText( getActivity(), R.string.recycle_donation_toast, Toast.LENGTH_LONG ).show();
             }
@@ -90,12 +92,12 @@ public class FragmentRecycle extends Fragment {
 
     private ArrayList<DonationCategory> createCategories() {
         ArrayList<DonationCategory> categories = new ArrayList<>();
-        categories.add( new DonationCategory( "Plastics", 0, "Gallons", "*This item has no fee" ) );
-        categories.add( new DonationCategory( "Plastic Food Containers", 0, "Gallons", "*This item has no fee" ) );
-        categories.add( new DonationCategory( "Paper", 0, "Gallons", "*This item has no fee" ) );
-        categories.add( new DonationCategory( "Glass Bottles/jars", 0, "Gallons", "*This item has no fee" ) );
-        categories.add( new DonationCategory( "Metal", 0, "Gallons", "*This item has no fee" ) );
-        categories.add( new DonationCategory( "Metal Food Cans", 0, "Gallons", "*This item has no fee" ) );
+        categories.add( new DonationCategory( "Plastics", 0, "Gallons", " " ) );
+        categories.add( new DonationCategory( "Plastic Food Containers", 0, "Gallons", " " ) );
+        categories.add( new DonationCategory( "Paper", 0, "Gallons", " " ) );
+        categories.add( new DonationCategory( "Glass Bottles/jars", 0, "Gallons", " " ) );
+        categories.add( new DonationCategory( "Metal", 0, "Gallons", " " ) );
+        categories.add( new DonationCategory( "Metal Food Cans", 0, "Gallons", " " ) );
         categories.add( new DonationCategory( "Paint", 0, "Gallons", "*This item has a fee" ) );
         categories.add( new DonationCategory( "Household Chemicals", 0, "Gallons", "*This item has a fee" ) );
         categories.add( new DonationCategory( "Electronics", 0, "Gallons", "*This item has a fee" ) );
