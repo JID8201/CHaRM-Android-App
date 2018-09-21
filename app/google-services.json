@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "468954936079",
+    "firebase_url": "https://charm-f4f06.firebaseio.com",
+    "project_id": "charm-f4f06",
+    "storage_bucket": "charm-f4f06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468954936079:android:40567a601dc86148",
+        "android_client_info": {
+          "package_name": "com.charm.charm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468954936079-qdbmfmf6ed7skuj5cg3lnbbrc9s5uil3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsEGJ7MgMN6Ix5Erk--2dj8cwz6YGeaRY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
