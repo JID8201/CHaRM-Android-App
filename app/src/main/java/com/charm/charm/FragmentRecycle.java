@@ -1,6 +1,5 @@
 package com.charm.charm;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,9 +14,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Date;
+
 
 
 /**
@@ -25,12 +27,21 @@ import java.util.ArrayList;
  */
 public class FragmentRecycle extends Fragment {
 
+    /** TODO : Zipcode stored as m_var to prevent access to pref in onClick meth below.
+     *          - Need to find better way to handle this in future
+    **/
+    private String zipcode;
 
     private View recycleView;
     private Spinner spinner;
+    private DatabaseReference mDatabase;
 
     public FragmentRecycle() {
         // Required empty public constructor
+    }
+
+    private void post2DB(Date fname, String field, String value) {
+        mDatabase.child("users").child(fname.toString()).child(field).setValue(value);
     }
 
 
@@ -41,7 +52,7 @@ public class FragmentRecycle extends Fragment {
         recycleView = inflater.inflate(R.layout.fragment_recycle, container, false);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences( getString( R.string.pref_preferences ), Context.MODE_PRIVATE );
-        String zipcode = sharedPreferences.getString( getString( R.string.pref_zipcode ), null );
+        zipcode = sharedPreferences.getString( getString( R.string.pref_zipcode ), null );
 
         TextView userZip = recycleView.findViewById( R.id.recycle_user_zip);
 
@@ -71,6 +82,8 @@ public class FragmentRecycle extends Fragment {
         EditText edit_donation_amount = recycleView.findViewById( R.id.recycle_num_quantity );
         edit_donation_amount.clearFocus();
 //        edit_donation_amount.setText( "0" );
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("/");
 
         // Reset spinner and donate amount when user hits donate button.
         Button donate_button = recycleView.findViewById( R.id.recycle_btn_donate );
