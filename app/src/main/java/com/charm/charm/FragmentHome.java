@@ -1,15 +1,27 @@
 package com.charm.charm;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 
@@ -35,6 +47,10 @@ public class FragmentHome extends Fragment {
 
         ListView listView = view.findViewById( R.id.home_list_categories );
         listView.setAdapter( donationAdapter );
+
+        Button donateButton = view.findViewById( R.id.home_btn_donate );
+
+        donateButton.setOnClickListener( donateClickListener );
 
         return view;
     }
@@ -71,6 +87,39 @@ public class FragmentHome extends Fragment {
         if( zipcode == null ) {
             ZipDialogFragment zipDialogFragment = new ZipDialogFragment();
             zipDialogFragment.show( getFragmentManager(), "zipcode" );
+        }
+    }
+
+
+    private View.OnClickListener donateClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            PayPalConfiguration config = new PayPalConfiguration()
+                    .environment( PayPalConfiguration.ENVIRONMENT_SANDBOX )
+                    .clientId( getString( R.string.charm_client_id ) );
+
+            PayPalPayment payment = new PayPalPayment( new BigDecimal( "1.00" ), "USD", "sample item", PayPalPayment.PAYMENT_INTENT_SALE );
+
+            Intent intent = new Intent( getActivity(), PaymentActivity.class );
+
+            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config );
+            intent.putExtra( PaymentActivity.EXTRA_PAYMENT, payment );
+
+            startActivityForResult( intent, 0 );
+        }
+    };
+
+    @Override
+    public void onActivityResult( int requestCode, int resultCode, Intent data ) {
+        if ( resultCode == Activity.RESULT_OK ) {
+            PaymentConfirmation confirm = data.getParcelableExtra( PaymentActivity.EXTRA_RESULT_CONFIRMATION );
+            if( confirm != null ) {
+                Toast.makeText( getActivity(), "Payment Successful", Toast.LENGTH_LONG ).show();
+            }
+        } else if ( resultCode == Activity.RESULT_CANCELED ) {
+            Log.i( "paymentExample", "The user canceled." );
+        } else if ( resultCode == PaymentActivity.RESULT_EXTRAS_INVALID ) {
+            Log.i( "paymentExample", "An invalid Payment or PayPalConfiguration was submitted. Please see the docs." );
         }
     }
 
