@@ -67,6 +67,16 @@
     <string name="zip_submit">Submit</string>
     <string name="zip_hint">30318</string>
 
+    <!-- Donate Dialog screen -->
+    <string name="donate_payment">Amount to Donate:</string>
+    <string name="donate_amount_hint">5.65</string>
+    <string name="donate_note">Note:</string>
+    <string name="donate_note_hint">Add a note here</string>
+    <string name="donate_empty_amount">Please add a donation amount</string>
+    <string name="donate_submit">Submit</string>
+    <string name="donate_cancel">Cancel</string>
+
+
     <!-- Preferences -->
     <string name="pref_preferences">preferences</string>
     <string name="pref_zipcode">zipcode</string>
