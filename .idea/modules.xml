@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CHaRM.iml" filepath="$PROJECT_DIR$/CHaRM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CHaRM-Android-App.iml" filepath="$PROJECT_DIR$/CHaRM-Android-App.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
