@@ -35,7 +35,6 @@ public class ZipDialogFragment extends DialogFragment {
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences( getString( R.string.pref_preferences ), Context.MODE_PRIVATE );
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString( getString( R.string.pref_zipcode ), zipcode );
-                Log.i( "TAG", zipcode );
                 editor.apply();
             }
         });

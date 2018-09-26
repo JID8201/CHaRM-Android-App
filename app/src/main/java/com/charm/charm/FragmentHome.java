@@ -15,13 +15,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
-import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 
@@ -94,18 +90,8 @@ public class FragmentHome extends Fragment {
     private View.OnClickListener donateClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            PayPalConfiguration config = new PayPalConfiguration()
-                    .environment( PayPalConfiguration.ENVIRONMENT_SANDBOX )
-                    .clientId( getString( R.string.charm_client_id ) );
-
-            PayPalPayment payment = new PayPalPayment( new BigDecimal( "1.00" ), "USD", "sample item", PayPalPayment.PAYMENT_INTENT_SALE );
-
-            Intent intent = new Intent( getActivity(), PaymentActivity.class );
-
-            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config );
-            intent.putExtra( PaymentActivity.EXTRA_PAYMENT, payment );
-
-            startActivityForResult( intent, 0 );
+            DonateDialogFragment donateDialogFragment = new DonateDialogFragment();
+            donateDialogFragment.show( getFragmentManager(), "donate" );
         }
     };
 
@@ -122,5 +108,7 @@ public class FragmentHome extends Fragment {
             Log.i( "paymentExample", "An invalid Payment or PayPalConfiguration was submitted. Please see the docs." );
         }
     }
+
+
 
 }
