@@ -109,5 +109,4 @@ public class DonateDialogFragment extends DialogFragment {
             });
         }
     }
-
 }

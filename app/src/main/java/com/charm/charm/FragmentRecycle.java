@@ -2,8 +2,10 @@ package com.charm.charm;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.icu.util.LocaleData;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +19,14 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.Date;
-
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 
 /**
@@ -40,8 +47,26 @@ public class FragmentRecycle extends Fragment {
         // Required empty public constructor
     }
 
-    private void post2DB(Date fname, String field, String value) {
-        mDatabase.child("users").child(fname.toString()).child(field).setValue(value);
+    private void post2DB(String material_type,
+                         String amount,
+                         String description,
+                         String zip_code) {
+
+        String key = mDatabase.push().getKey();
+
+
+        String orderId = Long.toHexString(System.currentTimeMillis());
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyymmdd", Locale.US);
+        Date date = new Date();
+
+        String timestamp = formatter.format(date);
+
+
+        String route = "/orders/" + key;
+        if (key != null) {
+            mDatabase.child("orders").child(key).child(orderId).child(timestamp).child(zip_code).child(material_type).child(amount).setValue(description);
+        }
     }
 
 
@@ -90,9 +115,16 @@ public class FragmentRecycle extends Fragment {
         donate_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                spinner.setSelection( 0 );
                 EditText edit_donation_amount = recycleView.findViewById( R.id.recycle_num_quantity );
                 EditText edit_description = recycleView.findViewById( R.id.recycle_edit_description );
+
+                String donation_material = ((DonationCategory) spinner.getSelectedItem()).getDonation_name();
+                String donation_amount = edit_donation_amount.getText().toString();
+                String donation_description = edit_description.getText().toString();
+
+                post2DB(donation_material, donation_amount, donation_description, zipcode);
+
+                spinner.setSelection( 0 );
                 edit_donation_amount.setText( "" );
                 edit_description.setText( "" );
 
