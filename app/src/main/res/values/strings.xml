@@ -83,9 +83,10 @@
 
     <!-- Recycle screen strings -->
     <string name="recycle_zip">Your zip code:</string>
-    <string name="recycle_donate_item">Donate a new Item</string>
-    <string name="recycle_donate_item_title">Donate Item</string>
-    <string name="recycle_donation_toast">Thank you for your donation</string>
+    <string name="recycle_donate_item">Recycle a new Item</string>
+    <string name="recycle_donate_item_title">Recycle Item</string>
+    <string name="recycle_donation_success">Thank you</string>
+    <string name="recycle_donation_error">There was an error</string>
     <string name="recycle_description_hint">Add a description...</string>
 
 </resources>
