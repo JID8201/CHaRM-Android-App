@@ -45,6 +45,7 @@ public class FragmentRecycle extends Fragment {
 
     private View recycleView;
     private Spinner spinner;
+    private String selected_spinner;
     private DatabaseReference mDatabase;
 
     public FragmentRecycle() {
@@ -68,9 +69,14 @@ public class FragmentRecycle extends Fragment {
         TextView userZip = recycleView.findViewById( R.id.recycle_user_zip);
 
         spinner = recycleView.findViewById( R.id.recycle_spinner_category );
-        RecycleSpinnerAdapter recycleSpinnerAdapter = new RecycleSpinnerAdapter( getActivity(), R.layout.adapter_recycle_spinner, createCategories() );
+
+        ArrayList<DonationCategory> categories = createCategories();
+        RecycleSpinnerAdapter recycleSpinnerAdapter = new RecycleSpinnerAdapter( getActivity(), R.layout.adapter_recycle_spinner, categories );
 
         spinner.setAdapter( recycleSpinnerAdapter );
+
+        // Set the selected Spinner value to our first position of the adapter.
+        selected_spinner = categories.get(0).getDonation_name();
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -79,6 +85,7 @@ public class FragmentRecycle extends Fragment {
 //                TextView chosen_category = view.findViewById(R.id.recycle_spinner_category);
                 TextView desctiption_view = recycleView.findViewById( R.id.recycle_txt_desc );
                 desctiption_view.setText( category.get_description() );
+                selected_spinner = category.getDonation_name();
             }
 
             @Override
@@ -105,10 +112,9 @@ public class FragmentRecycle extends Fragment {
                 EditText edit_donation_amount = recycleView.findViewById( R.id.recycle_num_quantity );
                 EditText edit_description = recycleView.findViewById( R.id.recycle_edit_description );
 
-                String type = spinner.getSelectedItem().toString();
                 String desc = edit_description.getText().toString();
                 int amount = Integer.parseInt( edit_donation_amount.getText().toString() );
-                sendDonePost( type,  desc,  amount );
+                sendDonePost( selected_spinner,  desc,  amount );
                 edit_donation_amount.setText( "" );
                 edit_description.setText( "" );
 //                Toast.makeText( getActivity(), R.string.recycle_donation_toast, Toast.LENGTH_LONG ).show();
@@ -120,7 +126,7 @@ public class FragmentRecycle extends Fragment {
 
     private void sendDonePost( String donation_type, String donation_description, int amount ) {
 //        String url = "http://localhost:3001/api/recycling";
-        String url = "http://10.0.2.2:8080/api/recycling";
+        String url = "http://192.168.1.174:3000/api/recycling";
 
         JSONObject jsonObject = new JSONObject();
 
@@ -138,6 +144,7 @@ public class FragmentRecycle extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Toast.makeText( getContext(), R.string.recycle_donation_toast, Toast.LENGTH_LONG ).show();
                         return;
                     }
                 },
