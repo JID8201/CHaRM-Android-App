@@ -14,12 +14,23 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -93,14 +104,55 @@ public class FragmentRecycle extends Fragment {
                 spinner.setSelection( 0 );
                 EditText edit_donation_amount = recycleView.findViewById( R.id.recycle_num_quantity );
                 EditText edit_description = recycleView.findViewById( R.id.recycle_edit_description );
+
+                String type = spinner.getSelectedItem().toString();
+                String desc = edit_description.getText().toString();
+                int amount = Integer.parseInt( edit_donation_amount.getText().toString() );
+                sendDonePost( type,  desc,  amount );
                 edit_donation_amount.setText( "" );
                 edit_description.setText( "" );
-
-                Toast.makeText( getActivity(), R.string.recycle_donation_toast, Toast.LENGTH_LONG ).show();
+//                Toast.makeText( getActivity(), R.string.recycle_donation_toast, Toast.LENGTH_LONG ).show();
             }
         });
 
         return recycleView;
+    }
+
+    private void sendDonePost( String donation_type, String donation_description, int amount ) {
+//        String url = "http://localhost:3001/api/recycling";
+        String url = "http://10.0.2.2:8080/api/recycling";
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put( "amount", amount );
+            jsonObject.put( "type", donation_type );
+            jsonObject.put( "notes", donation_description );
+            jsonObject.put( "zip", zipcode );
+
+        } catch( Exception e ) {
+
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        return;
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        return;
+                    }
+                })
+        {
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue( getContext() );
+        requestQueue.add( jsonObjectRequest );
     }
 
     private ArrayList<DonationCategory> createCategories() {
