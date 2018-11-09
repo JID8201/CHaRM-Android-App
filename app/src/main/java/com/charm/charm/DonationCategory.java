@@ -22,6 +22,7 @@ public class DonationCategory {
         this.description = "";
     }
 
+
     public int getDonation_amount() {
         return donation_amount;
     }

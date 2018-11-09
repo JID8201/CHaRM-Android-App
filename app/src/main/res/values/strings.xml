@@ -85,8 +85,12 @@
     <string name="recycle_zip">Your zip code:</string>
     <string name="recycle_donate_item">Recycle a new Item</string>
     <string name="recycle_donate_item_title">Recycle Item</string>
+    <string name="recycle_btn_recycle_list">Recycle all Items</string>
     <string name="recycle_donation_success">Thank you</string>
     <string name="recycle_donation_error">There was an error</string>
     <string name="recycle_description_hint">Add a description...</string>
+    <string name="recycle_add_button">Add Item</string>
+    <string name="recycle_hold_to_delete">Hold an item to remove it</string>
+    <string name="recycle_items_to_recycle">Items to recycle</string>
 
 </resources>

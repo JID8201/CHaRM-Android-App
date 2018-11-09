@@ -30,7 +30,13 @@ public class RecycleSpinnerAdapter extends ArrayAdapter<DonationCategory> {
         View view = LayoutInflater.from( getContext() ).inflate( R.layout.adapter_recycle_spinner, parent, false );
 
         TextView spinnerItem = view.findViewById( R.id.adapter_recycle_category );
-        spinnerItem.setText( category.getDonation_name() );
+        String spinnerItemText = category.getDonation_name();
+
+        if( !category.get_unit().equals( "" ) ) {
+            spinnerItemText += " (" + category.get_unit() + ")";
+        }
+
+        spinnerItem.setText( spinnerItemText );
 
         return view;
     }
