@@ -3,6 +3,7 @@ package com.charm.charm;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +20,15 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -106,20 +110,7 @@ public class FragmentRecycle extends Fragment {
         donate_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText edit_donation_amount = recycleView.findViewById( R.id.recycle_num_quantity );
-                EditText edit_description = recycleView.findViewById( R.id.recycle_edit_description );
-
-                String donation_material = ((DonationCategory) spinner.getSelectedItem()).getDonation_name();
-                String donation_amount = edit_donation_amount.getText().toString();
-                String donation_description = edit_description.getText().toString();
-
-                spinner.setSelection( 0 );
-
-                sendDonePost( donation_material,  donation_description,  Integer.parseInt( donation_amount ) );
-
-                // Clear values.
-                edit_donation_amount.setText( "" );
-                edit_description.setText( "" );
+                sendDonePost();
             }
         });
 
@@ -135,6 +126,7 @@ public class FragmentRecycle extends Fragment {
                 String donation_material = ((DonationCategory) spinner.getSelectedItem()).getDonation_name();
                 String donation_unit = ((DonationCategory) spinner.getSelectedItem()).get_unit();
                 String donation_amount = edit_donation_amount.getText().toString();
+                String donation_description = edit_description.getText().toString();
 
                 // Check that there is a donatable amount, and show a message if not.
                 if( donation_amount.equals( "" ) || donation_amount.equals( "0" ) ) {
@@ -144,7 +136,7 @@ public class FragmentRecycle extends Fragment {
                     toast.show();
                 } else {
                     // Add a new item to the adapter view.
-                    recycledAdapter.add( new DonationCategory( donation_material, Integer.parseInt( donation_amount ), donation_unit ) );
+                    recycledAdapter.add( new DonationCategory( donation_material, Integer.parseInt( donation_amount ), donation_unit, donation_description ) );
 
                     edit_donation_amount.setText( "" );
                     edit_description.setText( "" );
@@ -183,24 +175,34 @@ public class FragmentRecycle extends Fragment {
         listView.setAdapter( recycledAdapter );
     }
 
-    private void sendDonePost( String donation_type, String donation_description, int amount ) {
-        // Until we get an actual host this needs to be http://<your_ip_address>:<port_number>/api/recycling
-        // You can get your ip address from typing ipconfig in your terminal.
-        String url = "http://192.168.1.174:3001/api/recycling";
+    private void sendDonePost() {
+        String url = "http://charm-web-app.herokuapp.com/api/recycling";
 
-        JSONObject jsonObject = new JSONObject();
+        JSONArray items = new JSONArray();
+
+        for( int i = 0; i < recycled_items.size(); i++ ) {
+            JSONObject item = new JSONObject();
+            try {
+                item.put( "type", recycled_items.get(i).getDonation_name() );
+                item.put( "amount", recycled_items.get(i).getDonation_amount() );
+                item.put( "notes", recycled_items.get(i).get_description() );
+                items.put( item );
+            } catch ( Exception e ) {
+
+            }
+        }
+
+        JSONObject jsonBody = new JSONObject();
 
         try {
-            jsonObject.put( "amount", amount );
-            jsonObject.put( "type", donation_type );
-            jsonObject.put( "notes", donation_description );
-            jsonObject.put( "zip", zipcode );
+            jsonBody.put( "items", items );
+            jsonBody.put( "zip", 30332 );
 
         } catch( Exception e ) {
 
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, jsonBody,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -211,6 +213,7 @@ public class FragmentRecycle extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.e( "TAG", error.toString() );
                         Toast.makeText( getContext(), R.string.recycle_donation_error, Toast.LENGTH_LONG ).show();
                         return;
                     }
