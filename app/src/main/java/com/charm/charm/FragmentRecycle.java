@@ -37,9 +37,7 @@ import java.util.Locale;
  */
 public class FragmentRecycle extends Fragment {
 
-    /** TODO : Zipcode stored as m_var to prevent access to pref in onClick meth below.
-     *          - Need to find better way to handle this in future
-    **/
+
     private String zipcode;
 
     private View recycleView;
@@ -54,30 +52,7 @@ public class FragmentRecycle extends Fragment {
         // Required empty public constructor
     }
 
-    private void post2DB(String material_type,
-                         String amount,
-                         String description,
-                         String zip_code) {
-
-        String key = mDatabase.push().getKey();
-
-
-        String orderId = Long.toHexString(System.currentTimeMillis());
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyymmdd", Locale.US);
-        Date date = new Date();
-
-        String timestamp = formatter.format(date);
-
-
-        String route = "/orders/" + key;
-        if (key != null) {
-            mDatabase.child("orders").child(key).child(orderId).child(timestamp).child(zip_code).child(material_type).child(amount).setValue(description);
-        }
-    }
-
-
-    @Override
+        @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -137,8 +112,6 @@ public class FragmentRecycle extends Fragment {
                 String donation_material = ((DonationCategory) spinner.getSelectedItem()).getDonation_name();
                 String donation_amount = edit_donation_amount.getText().toString();
                 String donation_description = edit_description.getText().toString();
-
-                post2DB(donation_material, donation_amount, donation_description, zipcode);
 
                 spinner.setSelection( 0 );
 
