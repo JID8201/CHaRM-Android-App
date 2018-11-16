@@ -47,7 +47,6 @@ public class FragmentRecycle extends Fragment {
     private View recycleView;
     private Spinner spinner;
     private String selected_spinner;
-    private DatabaseReference mDatabase;
 
     private ArrayList<DonationCategory> recycled_items;
     private RecycledAdapter recycledAdapter;
@@ -102,8 +101,6 @@ public class FragmentRecycle extends Fragment {
         // Set editText for donation amount to 0.
         EditText edit_donation_amount = recycleView.findViewById( R.id.recycle_num_quantity );
         edit_donation_amount.clearFocus();
-
-        mDatabase = FirebaseDatabase.getInstance().getReference("/");
 
         // Reset spinner and donate amount when user hits donate button.
         Button donate_button = recycleView.findViewById( R.id.recycle_btn_donate );
