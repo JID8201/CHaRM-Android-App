@@ -3,6 +3,7 @@ package com.charm.charm;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -12,7 +13,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-public class ActivityHome extends AppCompatActivity {
+public class ActivityHome extends AppCompatActivity implements ZipDialogFragment.DialogListener {
+
+    public interface ActivityInterface {
+        void callListener();
+    }
+
+    private ActivityInterface listener;
+
+    public void setListener( ActivityInterface listener ) {
+        this.listener = listener;
+    }
 
     // Fragment variables
     private FragmentManager fragmentManager;
@@ -77,6 +88,7 @@ public class ActivityHome extends AppCompatActivity {
                                 FragmentRecycle fragmentRecycle = new FragmentRecycle();
                                 fragmentTransaction.replace( R.id.frame_fragment_container, fragmentRecycle );
                                 fragmentTransaction.commit();
+                                setListener( fragmentRecycle );
                                 break;
                             case R.id.nav_info_option:
                                 fragmentTransaction = fragmentManager.beginTransaction();
@@ -105,5 +117,9 @@ public class ActivityHome extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected( item );
+    }
+
+    public void onDialogPositiveClick( DialogFragment dialog ) {
+        listener.callListener();
     }
 }

@@ -1,7 +1,10 @@
 package com.charm.charm;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -39,10 +42,7 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentRecycle extends Fragment {
-
-
-    private String zipcode;
+public class FragmentRecycle extends Fragment implements ActivityHome.ActivityInterface  {
 
     private View recycleView;
     private Spinner spinner;
@@ -58,13 +58,9 @@ public class FragmentRecycle extends Fragment {
         @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         recycleView = inflater.inflate(R.layout.fragment_recycle, container, false);
-
-//        SharedPreferences sharedPreferences = getActivity().getSharedPreferences( getString( R.string.pref_preferences ), Context.MODE_PRIVATE );
-//        zipcode = sharedPreferences.getString( getString( R.string.pref_zipcode ), null );
-//
-//        TextView userZip = recycleView.findViewById( R.id.recycle_user_zip);
 
         recycled_items = new ArrayList<>();
         recycledAdapter = new RecycledAdapter( getContext(), recycled_items ) ;
@@ -107,7 +103,14 @@ public class FragmentRecycle extends Fragment {
         donate_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendDonePost();
+                String zipcode = getZipcode();
+
+                if( zipcode == null ) {
+                    ZipDialogFragment zipDialogFragment = new ZipDialogFragment();
+                    zipDialogFragment.show( getFragmentManager(), "zipcode" );
+                } else {
+                    sendDonePost();
+                }
             }
         });
 
@@ -173,6 +176,8 @@ public class FragmentRecycle extends Fragment {
     }
 
     private void sendDonePost() {
+        String zipcode = getZipcode();
+
         String url = "http://charm-web-app.herokuapp.com/api/recycling";
 
         JSONArray items = new JSONArray();
@@ -193,7 +198,7 @@ public class FragmentRecycle extends Fragment {
 
         try {
             jsonBody.put( "items", items );
-            jsonBody.put( "zip", 30332 );
+            jsonBody.put( "zip", zipcode );
 
         } catch( Exception e ) {
 
@@ -203,6 +208,7 @@ public class FragmentRecycle extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        clearRecycledList();
                         Toast.makeText( getContext(), R.string.recycle_donation_success, Toast.LENGTH_LONG ).show();
                         return;
                     }
@@ -216,7 +222,6 @@ public class FragmentRecycle extends Fragment {
                     }
                 })
         {
-
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue( getContext() );
@@ -238,5 +243,29 @@ public class FragmentRecycle extends Fragment {
         categories.add( new DonationCategory( "Mattresses", 0, "", "*This item has a fee" ) );
 
         return categories;
+    }
+
+    private void clearRecycledList() {
+        recycled_items.clear();
+        recycledAdapter.notifyDataSetChanged();
+
+        recycleView.findViewById( R.id.recycle_txt_hold ).setVisibility( View.INVISIBLE );
+        recycleView.findViewById( R.id.recycle_btn_donate ).setVisibility( View.INVISIBLE );
+    }
+
+    public void callListener() {
+        sendDonePost();
+    }
+
+    private String getZipcode() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences( getString( R.string.pref_preferences ), Context.MODE_PRIVATE );
+        return sharedPreferences.getString( getString( R.string.pref_zipcode ), null );
+    }
+
+    private void removeZipcode() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences( getString( R.string.pref_preferences ), Context.MODE_PRIVATE );
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString( getString( R.string.pref_zipcode ), null );
+        editor.apply();
     }
 }

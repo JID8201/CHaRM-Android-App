@@ -31,8 +31,7 @@ public class FragmentHome extends Fragment {
     public FragmentHome() {
         // Required empty public constructor
     }
-
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,24 +69,6 @@ public class FragmentHome extends Fragment {
         return categories;
     }
 
-    @Override
-    public void onViewCreated( View view, Bundle savedInstanceState ) {
-        // Uncomment this and comment out the code below to reset the entered zip code.
-//        SharedPreferences sharedPreferences = getActivity().getSharedPreferences( getString( R.string.pref_preferences ), Context.MODE_PRIVATE );
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putString( getString( R.string.pref_zipcode ), null );
-//        editor.apply();
-
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences( getString( R.string.pref_preferences ), Context.MODE_PRIVATE );
-        String zipcode = sharedPreferences.getString( getString( R.string.pref_zipcode ), null );
-
-        if( zipcode == null ) {
-            ZipDialogFragment zipDialogFragment = new ZipDialogFragment();
-            zipDialogFragment.show( getFragmentManager(), "zipcode" );
-        }
-    }
-
-
     private View.OnClickListener donateClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -109,7 +90,4 @@ public class FragmentHome extends Fragment {
             Log.i( "paymentExample", "An invalid Payment or PayPalConfiguration was submitted. Please see the docs." );
         }
     }
-
-
-
 }
