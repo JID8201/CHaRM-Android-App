@@ -62,7 +62,6 @@ public class ActivityHome extends AppCompatActivity implements ZipDialogFragment
     private void setupDrawer() {
         drawerLayout = findViewById(R.id.drawer_layout);
 
-
         // Set the home fragment as the selected item in our nav menu.
         NavigationView navigationView = findViewById( R.id.nav_view );
         navigationView.setCheckedItem( R.id.nav_home_option );
