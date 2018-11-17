@@ -1,10 +1,7 @@
 package com.charm.charm;
 
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,17 +18,15 @@ import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 import java.util.ArrayList;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FragmentHome extends Fragment {
 
-
     public FragmentHome() {
         // Required empty public constructor
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

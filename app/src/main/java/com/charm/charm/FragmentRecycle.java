@@ -46,7 +46,6 @@ public class FragmentRecycle extends Fragment implements ActivityHome.ActivityIn
 
     private View recycleView;
     private Spinner spinner;
-    private String selected_spinner;
 
     private ArrayList<DonationCategory> recycled_items;
     private RecycledAdapter recycledAdapter;
@@ -74,16 +73,12 @@ public class FragmentRecycle extends Fragment implements ActivityHome.ActivityIn
 
         spinner.setAdapter( recycleSpinnerAdapter );
 
-        // Set the selected Spinner value to our first position of the adapter.
-        selected_spinner = categories.get(0).getDonation_name();
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 DonationCategory category = (DonationCategory) adapterView.getItemAtPosition( position );
                 TextView description_view = recycleView.findViewById( R.id.recycle_txt_desc );
                 description_view.setText( category.get_description() );
-                selected_spinner = category.getDonation_name();
             }
 
             @Override
@@ -91,8 +86,6 @@ public class FragmentRecycle extends Fragment implements ActivityHome.ActivityIn
                 //
             }
         });
-
-//        userZip.setText( zipcode );
 
         // Set editText for donation amount to 0.
         EditText edit_donation_amount = recycleView.findViewById( R.id.recycle_num_quantity );
@@ -216,7 +209,6 @@ public class FragmentRecycle extends Fragment implements ActivityHome.ActivityIn
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e( "TAG", error.toString() );
                         Toast.makeText( getContext(), R.string.recycle_donation_error, Toast.LENGTH_LONG ).show();
                         return;
                     }
