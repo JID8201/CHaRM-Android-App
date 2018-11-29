@@ -30,11 +30,24 @@ This project was sponsered by [Live Thrive](http://livethrive.org/) and Peggy Wh
 # *Install Guide*
 
 ## Pre-requisites
-- Android Studio
+- [Android Studio 3+](https://developer.android.com/studio/)
 
 ## Dependencies
+- gradle 3.2+
+- google-services 4.1+
 
 ## Download Instructions
+
+The mobile app code can be downloaded:
+- as a zip file by clicking [here](https://github.com/JID8201/CHaRM-Android-App/archive/master.zip)
+
+or 
+
+- by cloning this repository by downloading [git](https://git-scm.com/downloads) and running the following command in a terminal
+
+'''
+git clone git@github.com:JID8201/CHaRM-Android-App.git
+'''
 
 ## Build Instructions
 
