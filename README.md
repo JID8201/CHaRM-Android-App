@@ -1,8 +1,8 @@
 # **CHaRM-Android-App**
 
-This appliation was developed for Georgia Tech's Junior Design program.
+This application was developed for Georgia Tech's Junior Design program.
 
-The web application that acompanies this mobile application can be found [here](https://github.com/JID8201/CHaRM-Web-App)
+The web application that accompanies this mobile application can be found [here](https://github.com/JID8201/CHaRM-Web-App)
 
 Development was done by
 - [Lucas Maurer](lmaurer9@gatech.edu)
@@ -12,7 +12,7 @@ Development was done by
 - [Bowen Ran](bran3@gatech.edu)
 - [Quynh Nhu Nguyen](qnguyen47@gatech.edu)
 
-This project was sponsered by [Live Thrive](http://livethrive.org/) and Peggy Whitlow Ratcliffe
+This project was sponsored by [Live Thrive](http://livethrive.org/) and Peggy Whitlow Ratcliffe
 
 # *Release Notes*
 
@@ -34,8 +34,8 @@ This project was sponsered by [Live Thrive](http://livethrive.org/) and Peggy Wh
 - Device with Android 5+
 
 ## Dependencies
-- gradle 3.2+
-- google-services 4.1+
+- Gradle 3.2+
+- Google-services 4.1+
 
 ## Download Instructions
 
@@ -68,10 +68,10 @@ See the Troubleshooting section bellow if you experience any problems with build
 
   1. Set your development device to developer mode by following the instructions [here](https://developer.android.com/studio/debug/dev-options)
   2. Once you've set your device to developer mode, plug the phone or tablet into your development computer using a phone to USB cable
-  3. Once this is done, press the green sideways triangle in the top right hand corner of your Android Studio Window (this is the same window you used to build the Android App previously)
+  3. Once this is done, press the green sideways triangle in the top right-hand corner of your Android Studio Window (this is the same window you used to build the Android App previously)
 
 ## Run Instructions
-Once the CHaRM App is installed, all you need to do to run it it maneuver to it on the device and open it.
+Once the CHaRM App is installed, all you need to do to run it is and open it (should be named CHaRM).
 
 ## Troubleshooting
 - If you get an error when submitting a recycling order, you have internet/cell signal, and the live website is up and running, then the problem likely is in the web app backend so go check there first.
