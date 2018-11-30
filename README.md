@@ -67,16 +67,15 @@ See the Troubleshooting section bellow if you experience any problems with build
 - To install the CHaRM Android App as a developer:
 
   1. Set your development device to developer mode by following the instructions [here](https://developer.android.com/studio/debug/dev-options)
-  2. Once you've set your device to develpper mode, plug the phone or tablet into your development computer using a phone to USB cable
+  2. Once you've set your device to developer mode, plug the phone or tablet into your development computer using a phone to USB cable
   3. Once this is done, press the green sideways triangle in the top right hand corner of your Android Studio Window (this is the same window you used to build the Android App previously)
 
 ## Run Instructions
 Once the CHaRM App is installed, all you need to do to run it it maneuver to it on the device and open it.
 
 ## Troubleshooting
-
-TODO add troubleshooting?
-
--
+- If you get an error when submitting a recycling order, you have internet/cell signal, and the live website is up and running, then the problem likely is in the web app backend so go check there first.
+- LOG statements can be used for dynamic debugging. [Here](https://developer.android.com/reference/android/util/Log) is a helpful link to inform you of how to use LOG statements if you need it.
+- Android studio provides static debugging, in case you've spelled a variable name wrong or forgot to close a set of braces. Use it!
 
 
