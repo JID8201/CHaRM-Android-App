@@ -16,6 +16,7 @@ This project was sponsored by [Live Thrive](http://livethrive.org/) and Peggy Wh
 
 # *Release Notes*
 
+## V1.0.0
 ## New Features
 - Users can now submit multiple recycle orders at once
 - Changed the donate button to link to Live Thrive site
