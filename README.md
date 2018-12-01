@@ -64,7 +64,7 @@ See the Troubleshooting section bellow if you experience any problems with build
 
 ## Installation Instructions
 
-- To install the CHaRM Android App as a user, visit the google play store and search CHaRM to find our app or click the link [here]
+- To install the CHaRM Android App as a user, visit the google play store and search CHaRM to find our app or click the link [here](https://play.google.com/store/apps/details?id=com.charm.charm)
 - To install the CHaRM Android App as a developer:
 
   1. Set your development device to developer mode by following the instructions [here](https://developer.android.com/studio/debug/dev-options)
