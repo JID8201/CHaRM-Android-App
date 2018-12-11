@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/toolbar_edit_zip"
+        android:icon="@drawable/ic_edit_location_black_icon"
+        app:showAsAction="ifRoom"
+        android:title="@string/toolbar_edit_zip"
+        android:visible="false">
+    </item>
+</menu>

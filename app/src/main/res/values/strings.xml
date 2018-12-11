@@ -36,12 +36,13 @@
     <string name="reg_invalid_password">Passwords must at least be 6 characters in length</string>
     <string name="reg_empty_email">Please enter an email</string>
 
-    <!-- Navigation header strings -->
+    <!-- Navigation header and toolbar header strings -->
     <string name="nav_home_option">Home</string>
     <string name="nav_map_option">Map</string>
     <string name="nav_recycle_option">Recycle</string>
     <string name="nav_settings_option">Settings</string>
     <string name="nav_info_option">Info</string>
+    <string name="toolbar_edit_zip">Edit Zip</string>
 
     <!-- Home screen strings -->
     <string name="home_button_donate">Donate to CHaRM on our webpage</string>

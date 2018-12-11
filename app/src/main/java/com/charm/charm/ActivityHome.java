@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 public class ActivityHome extends AppCompatActivity implements ZipDialogFragment.DialogListener {
@@ -30,6 +31,8 @@ public class ActivityHome extends AppCompatActivity implements ZipDialogFragment
 
     // DrawerLayout variables
     private DrawerLayout drawerLayout;
+
+    private Menu toolbarMenu;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -81,6 +84,8 @@ public class ActivityHome extends AppCompatActivity implements ZipDialogFragment
                                 FragmentHome fragmentHome = new FragmentHome();
                                 fragmentTransaction.replace( R.id.frame_fragment_container, fragmentHome );
                                 fragmentTransaction.commit();
+
+                                setEditZipInvisible( true );
                                 break;
                             case R.id.nav_recycle_option:
                                 fragmentTransaction = fragmentManager.beginTransaction();
@@ -88,12 +93,16 @@ public class ActivityHome extends AppCompatActivity implements ZipDialogFragment
                                 fragmentTransaction.replace( R.id.frame_fragment_container, fragmentRecycle );
                                 fragmentTransaction.commit();
                                 setListener( fragmentRecycle );
+
+                                setEditZipInvisible( false );
                                 break;
                             case R.id.nav_info_option:
                                 fragmentTransaction = fragmentManager.beginTransaction();
                                 FragmentInfo fragmentInfo = new FragmentInfo();
                                 fragmentTransaction.replace( R.id.frame_fragment_container, fragmentInfo );
                                 fragmentTransaction.commit();
+
+                                setEditZipInvisible( true );
                                 break;
                         }
 
@@ -113,12 +122,33 @@ public class ActivityHome extends AppCompatActivity implements ZipDialogFragment
             case android.R.id.home:
                 drawerLayout.openDrawer( GravityCompat.START );
                 return true;
+            case R.id.toolbar_edit_zip:
+//                findViewById( R.id.toolbar_edit_zip ).setVisibility(View.GONE);
         }
 
         return super.onOptionsItemSelected( item );
     }
 
+    // Menu icons are inflated just as they were with actionbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        toolbarMenu = menu;
+        return true;
+    }
+
     public void onDialogPositiveClick( DialogFragment dialog ) {
         listener.callListener();
+    }
+
+    private void setEditZipInvisible( Boolean invisible ) {
+        MenuItem toolbar_edit_zip = toolbarMenu.findItem( R.id.toolbar_edit_zip );
+        if( invisible ) {
+            toolbar_edit_zip.setVisible( false );
+        } else {
+            toolbar_edit_zip.setVisible( true );
+        }
+
     }
 }
