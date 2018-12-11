@@ -64,7 +64,8 @@
     <string name="info_contact_info_title">Contact Information</string>
 
     <!-- Zip Dialog screen -->
-    <string name="zip_title">Please enter your home zip code</string>
+    <string name="zip_title">Please enter your home zip code:</string>
+    <string name="zip_title_edit">Change your home zip code:</string>
     <string name="zip_submit">Submit</string>
     <string name="zip_hint">30318</string>
 

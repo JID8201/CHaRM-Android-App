@@ -10,11 +10,13 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class ZipDialogFragment extends DialogFragment {
 
     public interface DialogListener {
         public void onDialogPositiveClick( DialogFragment dialog );
+        public void onDialogCancel( DialogFragment dialog );
     }
 
     private DialogListener listener;
@@ -29,6 +31,19 @@ public class ZipDialogFragment extends DialogFragment {
 
         view = inflater.inflate( R.layout.dialog_zipcode, null );
 
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences( getString( R.string.pref_preferences ), Context.MODE_PRIVATE );
+        String current_zip = sharedPreferences.getString( getString( R.string.pref_zipcode ), "" );
+
+        // If our zip code is already set, show it, and change the title to better reflect user actions.
+        if( current_zip != null )
+        {
+            EditText zip_edit_text = view.findViewById( R.id.zip_edit_zipcode );
+            TextView zip_title = view.findViewById( R.id.zip_text_title );
+
+            zip_title.setText( R.string.zip_title_edit );
+            zip_edit_text.setText( current_zip );
+        }
+
         builder.setView( view );
 
         builder.setPositiveButton(R.string.zip_submit, new DialogInterface.OnClickListener() {
@@ -42,6 +57,14 @@ public class ZipDialogFragment extends DialogFragment {
                 editor.apply();
 
                 listener.onDialogPositiveClick( ZipDialogFragment.this );
+            }
+        });
+
+        // Handle case when the user does not enter in their zip code.
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                listener.onDialogCancel( ZipDialogFragment.this );
             }
         });
 

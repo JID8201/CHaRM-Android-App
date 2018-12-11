@@ -33,6 +33,7 @@ public class ActivityHome extends AppCompatActivity implements ZipDialogFragment
     private DrawerLayout drawerLayout;
 
     private Menu toolbarMenu;
+    private Boolean zip_modified_from_toolbar;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -57,6 +58,8 @@ public class ActivityHome extends AppCompatActivity implements ZipDialogFragment
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled( true );
         actionBar.setHomeAsUpIndicator( R.drawable.ic_menu_icon );
+
+        zip_modified_from_toolbar = false;
     }
 
     /**
@@ -123,7 +126,9 @@ public class ActivityHome extends AppCompatActivity implements ZipDialogFragment
                 drawerLayout.openDrawer( GravityCompat.START );
                 return true;
             case R.id.toolbar_edit_zip:
-//                findViewById( R.id.toolbar_edit_zip ).setVisibility(View.GONE);
+                zip_modified_from_toolbar = true;
+                ZipDialogFragment zipDialogFragment = new ZipDialogFragment();
+                zipDialogFragment.show( getSupportFragmentManager(), "zipcode" );
         }
 
         return super.onOptionsItemSelected( item );
@@ -139,7 +144,16 @@ public class ActivityHome extends AppCompatActivity implements ZipDialogFragment
     }
 
     public void onDialogPositiveClick( DialogFragment dialog ) {
-        listener.callListener();
+        if( !zip_modified_from_toolbar ) {
+            listener.callListener();
+        }
+        // Reset this after opening the toolbar
+        zip_modified_from_toolbar = false;
+    }
+
+    public void onDialogCancel( DialogFragment dialog ) {
+        // Reset this since the zip was exited.
+        zip_modified_from_toolbar = false;
     }
 
     private void setEditZipInvisible( Boolean invisible ) {
